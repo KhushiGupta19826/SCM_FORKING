@@ -32,6 +32,10 @@ int inputyear(void)
 	return year;
 }
 
+
+//!to find first day of year
+
+
 int determinedaycode(int year)
 {
 	int daycode;
