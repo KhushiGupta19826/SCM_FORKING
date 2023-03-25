@@ -8,6 +8,7 @@ int month_days[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
 
 //? Names of all the months 
+
 char *months[] = {
     "", //! to start indexing from 1
     "January",
@@ -22,39 +23,121 @@ char *months[] = {
     "October",
     "November",
     "December"};
+
 int main()
 {
     while (1)
     {
-        int year, month,day,days_in_Month,weekDay=0;
+        int year;
         printf("Enter Year: ");
         scanf("%d", &year);
-
-        //?Condition check for leap year 
-        if((year%4==0)&&(year%100!=0)||(year%400==0)){
-            month_days[2]=29;
-        }
-        else{
-            month_days[2]=28;
-        }
-
-        //?Printing the actual calender
-        for (month = 1; month <= 12; month++)
-        {
-            days_in_Month=month_days[month];
-            printf("\n\n-----------------%s-----------------", months[month]);
-            printf("\n\n\tSun\tMon\tTue\twed\tthur\tfri\tsat\n");
-            
-            //?Printing dates
-            //!Kuch galat hora hai printing me
-            for(day=1;day<=days_in_Month;day++){
-                printf("%d\t",day);
-                if(++weekDay>6){
-                    printf("\n");
-                }
-            }
-        }
+        int tem = day(year,2);
+   
+        desgin(tem , 2,4,year);
+      
     }
 
     return 0;
 }
+int day(int year , int month){
+	int leap  = (year-1)/4;
+	int normal = (year-1) - leap;
+	int days = leap*2 + normal;
+	return (days+start_month(month))%7;
+}
+int start_month(int month , int year){
+	int total = 0;
+	int i =0 ; 
+	for(i =1 ; i<month ; i++){
+		if(month == 1){
+			 if(year %4 ==0 ){
+			 	if(year%100 == 0 ){
+			 		if(year%400 == 0 ){
+			 			total =total+month_days[i]+1;
+					 }else{
+					 	total =total+month_days[i];
+					 }
+				 }else{
+				 	total =total+month_days[i];
+				 }
+			 }else{
+			 	total =total+month_days[i];
+			 }
+		}else{
+				total+=month_days[i];
+		}
+	
+	}
+	return total;
+}
+void desgin(int start_day , int month , int end , int year){
+	int i =0 ; 
+	char *day[] = {"S", "M","T","W","T","F","s"};
+
+	
+	int tem = start_day;
+	while(end>=month){
+		i  =0;
+		tem = start_day;
+	for(i =  0 ; i <7 ; i++){
+		printf("%s  " , day[i] );
+	}
+		i = 1;
+        	int end_day = month_days[month];
+        	// checking leap year
+        	if(month == 2){
+        		if(year%4 == 0 ){
+        			if(year%100 == 0 ){
+        				if(year%400 == 0 ){
+        					end_day++;
+						}
+					}else{
+						end_day++;
+					}
+				}
+			}
+        	printf("\n");
+		while(i<=end_day){
+		int j = 0;
+		
+		for(; j<7 ; j++){
+			
+			if(start_day==0){
+			
+			    if(i<10){
+			    		printf("%d  " , i);
+				}else{
+						printf("%d " , i);
+				}
+			   
+						i++;
+				if(i >end_day){
+			    	
+			    	break;
+				}
+						
+			}else{
+				
+				start_day--;
+				printf("   ");
+			}
+	      
+		}
+			printf("\n");
+	}
+
+		start_day = (tem+end_day)%7;
+			printf("\n");
+		
+		month++;;
+	
+	}
+	
+
+		
+		
+	    
+		
+	}
+	
+
