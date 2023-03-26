@@ -32,6 +32,9 @@ int main()
         int year, start_month, end_month;
         printf("Enter Year: ");
         scanf("%d", &year);
+        if (year ==0){
+            exit(0);
+        }
 
         printf("Enter start month number (1-12): ");
         scanf("%d", &start_month);
