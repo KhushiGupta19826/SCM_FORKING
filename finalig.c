@@ -30,6 +30,7 @@ int main()
     while (1)
     {
         int year, start_month, end_month;
+        printf("Enter 0 as year to exit. \n");
         printf("Enter Year: ");
         scanf("%d", &year);
         if (year ==0){
